@@ -17,3 +17,4 @@ function printNumbers() {
 printNumbers();
 //=================================================================
 //=================================================================
+// dependency injection classni ichida class chqirib olish
