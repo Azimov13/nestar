@@ -28,7 +28,7 @@ const MemberSchema = new Schema(
 		},
 
 		memberNick: {
-			typw: String,
+			type: String,
 			index: { unique: true, sparse: true },
 			required: true,
 		},
@@ -121,5 +121,4 @@ const MemberSchema = new Schema(
 	},
 );
 
-
-export default MemberSchema
+export default MemberSchema;
