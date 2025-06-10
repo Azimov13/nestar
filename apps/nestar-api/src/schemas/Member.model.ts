@@ -71,7 +71,7 @@ const MemberSchema = new Schema(
 			default: 0,
 		},
 
-		memberFollowings : {
+		memberFollowings: {
 			type: Number,
 			default: 0,
 		},
@@ -117,7 +117,7 @@ const MemberSchema = new Schema(
 	},
 	{
 		timestamps: true,
-		collection: 'member',
+		collection: 'members',
 	},
 );
 
