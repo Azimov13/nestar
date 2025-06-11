@@ -26,11 +26,26 @@ MASALAN: reverseInteger(123456789); return 987654321;
 Yuqoridagi misolda, function kiritilgan raqamlarni orqasiga
 o'girib (reverse) qilib qaytarmoqda.*/
 //=================================================================
-
-function reverseInteger(num: number): number {
-	const reversed = Number(num.toString().split('').reverse().join(''));
-	return reversed;
+// function reverseInteger(num: number): number {
+// 	const reversed = Number(num.toString().split('').reverse().join(''));
+// 	return reversed;
+// }
+// console.log(reverseInteger(123456789)); // 987654321
+//=================================================================
+//=================================================================
+/**ZL-TASK:
+Shunday function yozing, u parametrda berilgan stringni kebab casega otkazib qaytarsin. Bosh harflarni kichik harflarga ham otkazsin.
+MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab” */
+//=================================================================
+//=================================================================
+function stringToKebab(str: string): string {
+	return str
+		.toLowerCase() // Kichik harflarga o‘tkazish
+		.trim() // Boshi va oxiridagi bo‘sh joylarni olib tashlash
+		.replace(/[^a-z0-9\s]/g, '') // Maxsus belgilarni olib tashlash
+		.replace(/\s+/g, '-'); // Bo‘sh joylarni '-' bilan almashtirish
 }
 
-
-console.log(reverseInteger(123456789)); // 987654321
+console.log(stringToKebab('I love Kebab')); // "i-love-kebab"
+console.log(stringToKebab('  Hello World! ')); // "hello-world"
+console.log(stringToKebab('React & TypeScript')); // "react-typescript"
