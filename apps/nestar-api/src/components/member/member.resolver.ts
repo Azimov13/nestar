@@ -1,7 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { MemberService } from './member.service';
 import {
-	InternalServerErrorException,
 	UsePipes,
 	ValidationPipe,
 } from '@nestjs/common';
