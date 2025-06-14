@@ -21,7 +21,10 @@ import { T } from './libs/types/common';
 				console.log('error:', error);
 				const garphQLFormattedError = {
 					code: error?.extensions.code,
-					message: error?.extensions?.exception?.message || error?.extensions?.reponse?.message || error?.message,
+					message:
+						error?.extensions?.exception?.message ||
+						error?.extensions?.reponse?.message ||
+						error?.message,
 				};
 				console.log('GRAPQL GLOBAL ERR:', garphQLFormattedError);
 				return garphQLFormattedError;
