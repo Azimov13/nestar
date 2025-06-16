@@ -38,14 +38,36 @@ Shunday function yozing, u parametrda berilgan stringni kebab casega otkazib qay
 MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab” */
 //=================================================================
 //=================================================================
-function stringToKebab(str: string): string {
-	return str
-		.toLowerCase() // Kichik harflarga o‘tkazish
-		.trim() // Boshi va oxiridagi bo‘sh joylarni olib tashlash
-		.replace(/[^a-z0-9\s]/g, '') // Maxsus belgilarni olib tashlash
-		.replace(/\s+/g, '-'); // Bo‘sh joylarni '-' bilan almashtirish
-}
+// function stringToKebab(str: string): string {
+// 	return str
+// 		.toLowerCase() // Kichik harflarga o‘tkazish
+// 		.trim() // Boshi va oxiridagi bo‘sh joylarni olib tashlash
+// 		.replace(/[^a-z0-9\s]/g, '') // Maxsus belgilarni olib tashlash
+// 		.replace(/\s+/g, '-'); // Bo‘sh joylarni '-' bilan almashtirish
+// }
 
-console.log(stringToKebab('I love Kebab')); // "i-love-kebab"
-console.log(stringToKebab('  Hello World! ')); // "hello-world"
-console.log(stringToKebab('React & TypeScript')); // "react-typescript"
+// console.log(stringToKebab('I love Kebab')); // "i-love-kebab"
+// console.log(stringToKebab('  Hello World! ')); // "hello-world"
+// console.log(stringToKebab('React & TypeScript')); // "react-typescript"
+//=================================================================
+//=================================================================
+/**Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin.
+ *  Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
+MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda")  */
+function areParenthesesBalanced(text: string): boolean {
+	let c = 0;
+
+	for (let ch of text) {
+		if (ch === '(') c++;
+		if (ch === ')') c--;
+		if (c < 0) return false;
+	}
+
+	return c === 0;
+}
+//=================================================================
+console.log(areParenthesesBalanced('()')); // true
+console.log(areParenthesesBalanced('(()())')); // true
+console.log(areParenthesesBalanced('(()')); // false
+console.log(areParenthesesBalanced(')(')); // false
+//=================================================================
