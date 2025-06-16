@@ -1,4 +1,5 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { WithoutGuard } from 'apps/nestar-api/src/components/auth/guards/without.guard';
 import { MemberService } from './member.service';
 import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { LoginInput, MemberInput } from '../../libs/dto/member/member.input';
@@ -36,12 +37,16 @@ export class MemberResolver {
 		console.log('Query: checkAuthRoles');
 		return `HI ${authMember.memberNick}, you are ${authMember.memberType} (memberId: ${authMember._id})`;
 	}
-
+	@UseGuards(WithoutGuard)
 	@Query(() => Member)
-	public async getMember(@Args('memberId') input: string): Promise<Member> {
+	public async getMember(
+		@Args('memberId') input: string,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<Member> {
 		console.log('Query: getMember');
+		console.log('memberId:', memberId);
 		const targetId = shapeIntoMongoObjectId(input);
-		return this.memberService.getMember(targetId);
+		return this.memberService.getMember(memberId, targetId);
 	}
 
 	@UseGuards(AuthGuard)
