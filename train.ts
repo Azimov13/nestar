@@ -54,20 +54,37 @@ MASALAN: stringToKebab(“I love Kebab”) return “i-love-kebab” */
 /**Shunday function yozing, u parametrdagi string ichidagi qavslar miqdori balansda ekanligini aniqlasin.
  *  Ya'ni ochish("(") va yopish(")") qavslar soni bir xil bolishi kerak.
 MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda")  */
-function areParenthesesBalanced(text: string): boolean {
-	let c = 0;
+// function areParenthesesBalanced(text: string): boolean {
+// 	let c = 0;
 
-	for (let ch of text) {
-		if (ch === '(') c++;
-		if (ch === ')') c--;
-		if (c < 0) return false;
-	}
+// 	for (let ch of text) {
+// 		if (ch === '(') c++;
+// 		if (ch === ')') c--;
+// 		if (c < 0) return false;
+// 	}
 
-	return c === 0;
+// 	return c === 0;
+// }
+//=================================================================
+// console.log(areParenthesesBalanced('()')); // true
+// console.log(areParenthesesBalanced('(()())')); // true
+// console.log(areParenthesesBalanced('(()')); // false
+// console.log(areParenthesesBalanced(')(')); // false
+//=================================================================
+/**Shunday function yozing, u 2 ta array parametr qabul qilsin.
+Siz bu ikki arrayning qiymatlari o'xshash bo'lishini 
+(ya'ni, ularning barcha elementlari bir xil bo'lishini) tekshirishingiz kerak.
+MASALAN:
+areArraysEqual([1, 2, 3], [3, 1, 2]) // true
+areArraysEqual([1, 2, 3], [3, 1, 2, 1]) // true
+areArraysEqual([1, 2, 3], [4, 1, 2]) // false */
+//=================================================================
+//=================================================================
+function areArraysEqual(a: number[], b: number[]): boolean {
+	return a.length === b.length && a.sort().toString() === b.sort().toString();
 }
 //=================================================================
-console.log(areParenthesesBalanced('()')); // true
-console.log(areParenthesesBalanced('(()())')); // true
-console.log(areParenthesesBalanced('(()')); // false
-console.log(areParenthesesBalanced(')(')); // false
 //=================================================================
+console.log(areArraysEqual([1, 2, 3], [3, 1, 2])); // true
+console.log(areArraysEqual([1, 2, 3], [3, 1, 2, 1])); // false
+console.log(areArraysEqual([1, 2, 3], [4, 1, 2])); // false

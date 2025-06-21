@@ -1,5 +1,11 @@
 import { Schema } from 'mongoose';
-import { PropertyLocation, PropertyStatus, PropertyType } from '../libs/enums/property.enum';
+// import PropertySchema from '../schemas/Property.model';
+
+import {
+	PropertyLocation,
+	PropertyStatus,
+	PropertyType,
+} from '../libs/enums/property.enum';
 
 const PropertySchema = new Schema(
 	{
@@ -111,6 +117,9 @@ const PropertySchema = new Schema(
 	{ timestamps: true, collection: 'properties' },
 );
 
-PropertySchema.index({ propertyType: 1, propertyLocation: 1, propertyTitle: 1, propertyPrice: 1 }, { unique: true });
+PropertySchema.index(
+	{ propertyType: 1, propertyLocation: 1, propertyTitle: 1, propertyPrice: 1 },
+	{ unique: true },
+);
 
 export default PropertySchema;
