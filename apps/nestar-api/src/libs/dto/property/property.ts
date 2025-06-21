@@ -62,7 +62,7 @@ export class Property {
 	@Field(() => Boolean)
 	propertyRent: boolean;
 
-	@Field(() => Boolean)
+	@Field(() => String)
 	memberId: ObjectId;
 
 	@Field(() => Date, { nullable: true })

@@ -100,7 +100,7 @@ const PropertySchema = new Schema(
 			type: Schema.Types.ObjectId,
 			required: true,
 			ref: 'Member',
-		},
+		}, 
 
 		soldAt: {
 			type: Date,
