@@ -53,8 +53,8 @@ class AISearch {
 export class AgentsInquiry {
 	@IsNotEmpty()
 	@Min(1)
-	@Field(() => Int)
-	page: number;
+	@Field(() => Int)//GarpQl
+	page: number;//TypeScript
 
 	@IsNotEmpty()
 	@Min(1)

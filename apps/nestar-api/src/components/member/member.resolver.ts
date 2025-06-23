@@ -1,7 +1,13 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { WithoutGuard } from 'apps/nestar-api/src/components/auth/guards/without.guard';
 import { MemberService } from './member.service';
-import { UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+	BadRequestException,
+	InternalServerErrorException,
+	UseGuards,
+	UsePipes,
+	ValidationPipe,
+} from '@nestjs/common';
 import {
 	AgentsInquiry,
 	LoginInput,
@@ -88,7 +94,7 @@ export class MemberResolver {
 		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Members> {
 		console.log('Query: getAgents');
-		return await this.memberService.getAgents(memberId, input);
+		return await this.memberService.getAgents(memberId, input);//inputType va Object type farqi biri kiribkelayotgan data biri chiqib chi
 	}
 
 	//**ADMIN */
@@ -126,9 +132,10 @@ export class MemberResolver {
 	): Promise<string> {
 		console.log('Mutation: imageUploader');
 
-		if (!filename) throw new Error(Message.UPLOAD_FAILED);
+		if (!filename) throw new InternalServerErrorException(Message.UPLOAD_FAILED);
 		const validMime = validMimeTypes.includes(mimetype);
-		if (!validMime) throw new Error(Message.PROVIDE_ALLOWED_FORMAT);
+		if (!validMime)
+			throw new BadRequestException(Message.PROVIDE_ALLOWED_FORMAT);
 
 		const imageName = getSerialForImage(filename);
 		const url = `uploads/${target}/${imageName}`;
@@ -140,7 +147,7 @@ export class MemberResolver {
 				.on('finish', async () => resolve(true))
 				.on('error', () => reject(false));
 		});
-		if (!result) throw new Error(Message.UPLOAD_FAILED);
+		if (!result) throw new InternalServerErrorException(Message.UPLOAD_FAILED);
 
 		return url;
 	}
@@ -165,7 +172,10 @@ export class MemberResolver {
 						await img;
 
 					const validMime = validMimeTypes.includes(mimetype);
-					if (!validMime) throw new Error(Message.PROVIDE_ALLOWED_FORMAT);
+					if (!validMime)
+						throw new InternalServerErrorException(
+							Message.PROVIDE_ALLOWED_FORMAT,
+						);
 
 					const imageName = getSerialForImage(filename);
 					const url = `uploads/${target}/${imageName}`;
@@ -177,7 +187,10 @@ export class MemberResolver {
 							.on('finish', () => resolve(true))
 							.on('error', () => reject(false));
 					});
-					if (!result) throw new Error(Message.UPLOAD_FAILED);
+					if (!result)
+						throw new InternalServerErrorException(
+							Message.UPLOAD_FAILED,
+						);
 
 					uploadedImages[index] = url;
 				} catch (err) {
