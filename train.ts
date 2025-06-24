@@ -80,11 +80,27 @@ areArraysEqual([1, 2, 3], [3, 1, 2, 1]) // true
 areArraysEqual([1, 2, 3], [4, 1, 2]) // false */
 //=================================================================
 //=================================================================
-function areArraysEqual(a: number[], b: number[]): boolean {
-	return a.length === b.length && a.sort().toString() === b.sort().toString();
+// function areArraysEqual(a: number[], b: number[]): boolean {
+// 	return a.length === b.length && a.sort().toString() === b.sort().toString();
+// }
+//=================================================================
+//=================================================================
+// console.log(areArraysEqual([1, 2, 3], [3, 1, 2])); // true
+// console.log(areArraysEqual([1, 2, 3], [3, 1, 2, 1])); // false
+// console.log(areArraysEqual([1, 2, 3], [4, 1, 2])); // false
+//=================================================================
+//=================================================================
+// **TASK ZQ:
+// Shunday function yozing, bu function berilgan array parametr
+// ichida ikki marotaba yoki undan ko'p takrorlangan sonlarni alohida
+// array'da yagonadan qaytarsin qaytarsin.
+// MASALAN: findDuplicates([1,2,3,4,5,4,3,4]); return [3, 4];//
+
+function findDuplicates(arr: number[]) {
+	let r: number[] = [];
+	for (let i = 0; i < arr.length; i++)
+		if (arr.indexOf(arr[i]) !== i && !r.includes(arr[i])) r.push(arr[i]);
+	return r;
 }
 //=================================================================
 //=================================================================
-console.log(areArraysEqual([1, 2, 3], [3, 1, 2])); // true
-console.log(areArraysEqual([1, 2, 3], [3, 1, 2, 1])); // false
-console.log(areArraysEqual([1, 2, 3], [4, 1, 2])); // false
