@@ -10,13 +10,13 @@ import { BoardArticleModule } from '../board-article/board-article.module';
 
 @Module({
 	imports: [
-		MongooseModule.forFeature([{ name: 'Property', schema: PropertySchema }]),//MVC
+		MongooseModule.forFeature([{ name: 'Property', schema: PropertySchema }]), //MVC
 		AuthModule,
 		ViewModule,
 		MemberModule,
 		BoardArticleModule,
 	],
 	providers: [PropertyResolver, PropertyService],
-	exports:[PropertyService],
+	exports: [PropertyService],
 })
 export class PropertyModule {}

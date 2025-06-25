@@ -62,7 +62,6 @@ MASALAN: areParenthesesBalanced("string()ichida(qavslar)soni()balansda")  */
 // 		if (ch === ')') c--;
 // 		if (c < 0) return false;
 // 	}
-
 // 	return c === 0;
 // }
 //=================================================================
@@ -95,12 +94,32 @@ areArraysEqual([1, 2, 3], [4, 1, 2]) // false */
 // ichida ikki marotaba yoki undan ko'p takrorlangan sonlarni alohida
 // array'da yagonadan qaytarsin qaytarsin.
 // MASALAN: findDuplicates([1,2,3,4,5,4,3,4]); return [3, 4];//
+// function findDuplicates(arr: number[]) {
+// 	let r: number[] = [];
+// 	for (let i = 0; i < arr.length; i++)
+// 		if (arr.indexOf(arr[i]) !== i && !r.includes(arr[i])) r.push(arr[i]);
+// 	return r;
+// }
+//=================================================================
+//=================================================================
 
-function findDuplicates(arr: number[]) {
-	let r: number[] = [];
-	for (let i = 0; i < arr.length; i++)
-		if (arr.indexOf(arr[i]) !== i && !r.includes(arr[i])) r.push(arr[i]);
-	return r;
-}
+//**TASK ZR:
+// Shunday function yozing, bu function,
+// berilgan parametr string tarkibidagi raqam va sonlarni
+// sanab object sifatida qaytarsin.
+// MASALAN: countNumberAndLetters(“string152%\¥”); return {number: 3, letter: 6};*//
+//=================================================================
+//=================================================================
+const countNumberAndLetters = (s: string) => {
+	let n = 0,
+		l = 0;
+	for (let c of s)
+		c >= '0' && c <= '9'
+			? n++
+			: ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) && l++;
+	return { number: n, letter: l };
+};
+
+console.log(countNumberAndLetters('abc123!')); // { number: 3, letter: 3 }
 //=================================================================
 //=================================================================
