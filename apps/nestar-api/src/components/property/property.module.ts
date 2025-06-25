@@ -6,6 +6,7 @@ import PropertySchema from '../../schemas/Property.model';
 import { AuthModule } from '../auth/auth.module';
 import { ViewModule } from '../view/view.module';
 import { MemberModule } from '../member/member.module';
+import { BoardArticleModule } from '../board-article/board-article.module';
 
 @Module({
 	imports: [
@@ -13,6 +14,7 @@ import { MemberModule } from '../member/member.module';
 		AuthModule,
 		ViewModule,
 		MemberModule,
+		BoardArticleModule,
 	],
 	providers: [PropertyResolver, PropertyService],
 })

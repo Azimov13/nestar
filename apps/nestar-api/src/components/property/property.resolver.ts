@@ -16,10 +16,16 @@ import { ObjectId } from 'mongoose';
 import { WithoutGuard } from '../auth/guards/without.guard';
 import { shapeIntoMongoObjectId } from '../../libs/config';
 import { PropertyUpdate } from '../../libs/dto/property/property.update';
+import { BoardArticles } from '../../libs/dto/board-article/board-article';
+import { BoardArticlesInquiry } from '../../libs/dto/board-article/board-article.input';
+import { BoardArticleService } from '../board-article/board-article.service';
 
 @Resolver()
 export class PropertyResolver {
-	constructor(private readonly propertyService: PropertyService) {}
+	constructor(
+		private readonly propertyService: PropertyService,
+		private readonly boardArticleService: BoardArticleService,
+	) {}
 	//AUTHORIZATION
 	@Roles(MemberType.AGENT)
 	@UseGuards(RolesGuard)
@@ -112,5 +118,15 @@ export class PropertyResolver {
 		console.log('Mutation:removePropertyByAdmin');
 		const propertyId = shapeIntoMongoObjectId(input);
 		return await this.propertyService.removePropertyByAdmin(propertyId);
+	}
+
+	@UseGuards(WithoutGuard)
+	@Query((returns) => BoardArticles)
+	public async getBoardArticles(
+		@Args('input') input: BoardArticlesInquiry,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<BoardArticles> {
+		console.log('Query: getBoardArticles');
+		return await this.boardArticleService.getBoardArticles(memberId, input);
 	}
 }
