@@ -89,8 +89,8 @@ export class Property {
 
 @ObjectType()
 export class Properties {
-	@Field(() => [Property])
-	list: Property[];
+	@Field(() => [Property])//GraphQl
+	list: Property[];//TypeScript  2xil til ishlatilyabdi 
 
 	@Field(() => [TotalCounter], { nullable: true })
 	metaCounter: TotalCounter[];

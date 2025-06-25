@@ -20,7 +20,7 @@ import { PropertyUpdate } from '../../libs/dto/property/property.update';
 @Resolver()
 export class PropertyResolver {
 	constructor(private readonly propertyService: PropertyService) {}
-
+	//AUTHORIZATION
 	@Roles(MemberType.AGENT)
 	@UseGuards(RolesGuard)
 	@Mutation(() => Property)
@@ -33,7 +33,8 @@ export class PropertyResolver {
 
 		return await this.propertyService.createProperty(input);
 	}
-
+	//RETRIEVE VS AUTHENTICATION
+	//PIPE=>GUARD=>INTERCEPTOR
 	@UseGuards(WithoutGuard)
 	@Query((returns) => Property)
 	public async getProperty(
@@ -93,7 +94,7 @@ export class PropertyResolver {
 
 	@Roles(MemberType.ADMIN)
 	@UseGuards(RolesGuard)
-	@Mutation((returns) => Property) //data ni ozgartirish uchun yoki yagilash uchun Muatation foydalanamiz
+	@Mutation((returns) => Property) //data ni ozgartirish uchun yoki yangilash uchun Muatation foydalanamiz
 	public async updatePropertyByAdmin(
 		@Args('input') input: PropertyUpdate,
 	): Promise<Property> {
@@ -102,14 +103,14 @@ export class PropertyResolver {
 		return await this.propertyService.updatePropertyByAdmin(input);
 	}
 
-
-
 	@Roles(MemberType.ADMIN)
 	@UseGuards(RolesGuard)
 	@Mutation((returns) => Property)
-	public async removePropertyByAdmin(@Args("propertyId") input:string):Promise<Property> {
-		console.log("Mutation:removePropertyByAdmin");
-		const propertyId = shapeIntoMongoObjectId(input)
-		return await this.propertyService.removePropertyByAdmin(propertyId)
+	public async removePropertyByAdmin(
+		@Args('propertyId') input: string,
+	): Promise<Property> {
+		console.log('Mutation:removePropertyByAdmin');
+		const propertyId = shapeIntoMongoObjectId(input);
+		return await this.propertyService.removePropertyByAdmin(propertyId);
 	}
 }

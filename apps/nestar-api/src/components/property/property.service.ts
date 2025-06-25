@@ -150,7 +150,7 @@ export class PropertyService {
 						list: [
 							{ $skip: (input.page - 1) * input.limit },
 							{ $limit: input.limit },
-							lookupMember,
+							lookupMember, //[Property1memberID, property2memberid, property3+memberdata]
 							{ $unwind: '$memberData' },
 						],
 						metaCounter: [{ $count: 'total' }],
