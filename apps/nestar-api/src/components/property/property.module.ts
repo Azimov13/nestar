@@ -17,5 +17,6 @@ import { BoardArticleModule } from '../board-article/board-article.module';
 		BoardArticleModule,
 	],
 	providers: [PropertyResolver, PropertyService],
+	exports:[PropertyService],
 })
 export class PropertyModule {}
