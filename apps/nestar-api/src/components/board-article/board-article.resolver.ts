@@ -39,7 +39,7 @@ export class BoardArticleResolver {
 		@Args('articleId') input: string, //string value qaytaradi
 		@AuthMember('_id') memberId: ObjectId, //Auth bolgan bolsa memberId bolmagan bolsa null ni qaytaradi //without guard.ts da hosil qilib olganmiz
 	): Promise<BoardArticle> {
-		console.log('Query: Property');
+		console.log('Query: getBoardArticle');
 		const articleId = shapeIntoMongoObjectId(input); //articleid ni stringdan objectid aylantiryamiz
 		return await this.boardArticleService.getBoardArticle(memberId, articleId);
 	}

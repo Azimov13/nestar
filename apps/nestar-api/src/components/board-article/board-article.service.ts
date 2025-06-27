@@ -80,13 +80,13 @@ export class BoardArticleService {
 					_id: articleId,
 					targetKey: 'articleViews',
 					modifier: 1,
-				});
-				targetBoardArticle.articleViews++;
+				}); //databaseda update qiladi
+				targetBoardArticle.articleViews++; //frontend daham ozgartiradi
 			}
 		}
 		targetBoardArticle.memberData = await this.memberService.getMember(
 			null,
-			targetBoardArticle.memberId,
+			targetBoardArticle.memberId, //memberData kim tamonidan yaratilganini bildiradi
 		);
 		return targetBoardArticle;
 	}
@@ -130,7 +130,8 @@ export class BoardArticleService {
 		const { articleCategory, text } = input.search;
 		const match: T = { articleStatus: BoardArticleStatus.ACTIVE };
 		const sort: T = {
-			[input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC,
+			[input?.sort ?? 'createdAt']: input?.direction ?? Direction.DESC, //dynamic key hosil qilish uchun arrayni ishlatishda
+			//sabab stringni olib tashlab return qil diyamiz
 		};
 
 		if (articleCategory) match.articleCategory = articleCategory;
@@ -186,7 +187,7 @@ export class BoardArticleService {
 							{ $skip: (input.page - 1) * input.limit },
 							{ $limit: input.limit },
 							lookupMember,
-							{ $unwind: '$memberData' },
+							{ $unwind: '$memberData' },//arrayni ochirib objecttypega ozgartitib beradi
 						],
 						metaCounter: [{ $count: 'total' }],
 					},
@@ -235,8 +236,8 @@ export class BoardArticleService {
 	): Promise<BoardArticle> {
 		const search: T = {
 			_id: articleId,
-			articleStatus: BoardArticleStatus.DELETE,//delete bolgan articlelarni remove qila olamiz
-		};//2ta mantiq bor delete statusni ozgartirish remove esa butunlay ochirish 
+			articleStatus: BoardArticleStatus.DELETE, //delete bolgan articlelarni remove qila olamiz
+		}; //2ta mantiq bor delete statusni ozgartirish remove esa butunlay ochirish
 		const result = await this.boardArticleModel.findByIdAndDelete(search).exec();
 		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
 

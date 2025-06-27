@@ -30,8 +30,8 @@ import { T } from './libs/types/common';
 				return garphQLFormattedError;
 			},
 		}),
-		ComponentsModule, //HTTP
-		DatabaseModule, //TCP
+		ComponentsModule, //HTTP bir marta ulanadi 
+		DatabaseModule, //TCP  database ulanyabdi holos
 	],
 	controllers: [AppController],
 	providers: [AppService, AppResolver],
