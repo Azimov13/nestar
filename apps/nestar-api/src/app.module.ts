@@ -8,6 +8,7 @@ import { AppResolver } from './app.resolver';
 import { ComponentsModule } from './components/components.module';
 import { DatabaseModule } from './database/database.module';
 import { T } from './libs/types/common';
+import { LikeService } from './component/like/like.service';
 
 @Module({
 	imports: [
@@ -34,6 +35,6 @@ import { T } from './libs/types/common';
 		DatabaseModule, //TCP  database ulanyabdi holos
 	],
 	controllers: [AppController],
-	providers: [AppService, AppResolver],
+	providers: [AppService, AppResolver, LikeService],
 })
 export class AppModule {}
