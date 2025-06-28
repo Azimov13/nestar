@@ -12,22 +12,21 @@ export class LikeService {
 
 	public async toggleLike(input: LikeInput): Promise<number> {
 		const search: T = { memberId: input.memberId, likeRefId: input.likeRefId },
-        exist = await this.likeModel.findOne(search).exec()
-        let modifier = 1;
+			exist = await this.likeModel.findOne(search).exec();
+		let modifier = 1;
 
-
-        if(exist) {
-            await this.likeModel.findOneAndDelete(search).exec()
-            modifier = -1;
-        }else {
-            try{
-                await this.likeModel.create(input)
-            }catch(err) {
-                console.log("Error, Service.model",err.message);
-                throw new BadRequestException(Message.CREATE_FAILED)
-            }
-        }
-        console.log(`- Like modifier ${modifier} - `)
-		return 0;
-	}
+		if (exist) {
+			await this.likeModel.findOneAndDelete(search).exec();
+			modifier = -1;
+		} else {
+			try {
+				await this.likeModel.create(input);
+			} catch (err) {
+				console.log('Error, Service.model', err.message);
+				throw new BadRequestException(Message.CREATE_FAILED);
+			}
+		}
+		console.log(`- Like modifier ${modifier} - `);
+		return modifier;
+	} //dynamic multi usage mantiq
 }

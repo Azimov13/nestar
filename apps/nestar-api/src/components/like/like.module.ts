@@ -6,6 +6,6 @@ import { LikeService } from './like.service';
 @Module({
 	imports: [MongooseModule.forFeature([{ name: 'Like', schema: LikeSchema }])],
 	providers: [LikeService],
-    exports:[LikeService],
+	exports: [LikeService],
 })
 export class LikeModule {}

@@ -19,6 +19,7 @@ import { PropertyUpdate } from '../../libs/dto/property/property.update';
 import { BoardArticles } from '../../libs/dto/board-article/board-article';
 import { BoardArticlesInquiry } from '../../libs/dto/board-article/board-article.input';
 import { BoardArticleService } from '../board-article/board-article.service';
+import { AuthGuard } from '../auth/guards/auth.guard';
 
 @Resolver()
 export class PropertyResolver {
@@ -77,12 +78,23 @@ export class PropertyResolver {
 	@Roles(MemberType.AGENT)
 	@UseGuards(RolesGuard)
 	@Query((returns) => Properties)
-	public async getAgentPropertiesInquiry(
+	public async getAgentProperties(
 		@Args('input') input: AgentPropertiesInquiry,
 		@AuthMember('_id') memberId: ObjectId,
 	): Promise<Properties> {
-		console.log('Query:getAgentProperties');
+		console.log('Query: getAgentProperties');
 		return await this.propertyService.getAgentProperties(memberId, input);
+	}
+
+	@UseGuards(AuthGuard)
+	@Mutation(() => Property)
+	public async likeTargetProperty(
+		@Args('propertyId') input: string,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<Property> {
+		console.log('Mutation: likeTargetProperty');
+		const likeRefId = shapeIntoMongoObjectId(input);
+		return await this.propertyService.likeTargetProperty(memberId, likeRefId);
 	}
 
 	//**ADMIN */
