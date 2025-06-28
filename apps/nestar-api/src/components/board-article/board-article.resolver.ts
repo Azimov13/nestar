@@ -20,7 +20,7 @@ import { MemberType } from '../../libs/enums/member.enum';
 import { RolesGuard } from '../auth/guards/roles.guard';
 
 @Resolver()
-export class BoardArticleResolver {
+export class  BoardArticleResolver {
 	constructor(private readonly boardArticleService: BoardArticleService) {}
 
 	@UseGuards(AuthGuard)
@@ -42,6 +42,18 @@ export class BoardArticleResolver {
 		console.log('Query: getBoardArticle');
 		const articleId = shapeIntoMongoObjectId(input); //articleid ni stringdan objectid aylantiryamiz
 		return await this.boardArticleService.getBoardArticle(memberId, articleId);
+	}
+
+
+	@UseGuards(AuthGuard)
+	@Mutation(() => BoardArticle)
+	public async likeTargetBoardArticle(
+		@Args('articleId') input: string,
+		@AuthMember('_id') memberId: ObjectId,
+	): Promise<BoardArticle> {
+		console.log('Mutation: likeTargetBoardArticle');
+		const likeRefId = shapeIntoMongoObjectId(input);
+		return await this.boardArticleService.likeTargetBoardArticle(memberId, likeRefId);
 	}
 
 	@UseGuards(AuthGuard)
