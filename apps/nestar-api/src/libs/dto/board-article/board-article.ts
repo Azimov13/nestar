@@ -5,6 +5,7 @@ import {
 } from '../../enums/board-article.enum';
 import { ObjectId } from 'mongoose';
 import { Member, TotalCounter } from '../member/member';
+import { MeLiked } from '../like/like';
 
 @ObjectType()
 export class BoardArticle {
@@ -48,6 +49,13 @@ export class BoardArticle {
 
 	@Field(() => Member, { nullable: true })
 	memberData?: Member;
+
+	/**from aggregate */
+
+	@Field(() => [MeLiked], { nullable: true })
+	meLiked?: MeLiked[];
+
+	
 }
 
 @ObjectType()

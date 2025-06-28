@@ -6,6 +6,7 @@ import {
 	PropertyType,
 } from '../../enums/property.enum';
 import { Member, TotalCounter } from '../member/member';
+import { MeLiked } from '../like/like';
 
 @ObjectType()
 export class Property {
@@ -85,12 +86,17 @@ export class Property {
 
 	@Field(() => Member, { nullable: true })
 	memberData?: Member;
+
+	/**from aggregate */
+
+	@Field(() => [MeLiked], { nullable: true })
+	meLiked?: MeLiked[];
 }
 
 @ObjectType()
 export class Properties {
-	@Field(() => [Property])//GraphQl
-	list: Property[];//TypeScript  2xil til ishlatilyabdi 
+	@Field(() => [Property]) //GraphQl
+	list: Property[]; //TypeScript  2xil til ishlatilyabdi
 
 	@Field(() => [TotalCounter], { nullable: true })
 	metaCounter: TotalCounter[];
