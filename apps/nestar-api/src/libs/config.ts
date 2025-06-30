@@ -62,7 +62,8 @@ export const lookupAuthMemberLiked = (memberId: T, targetRefId: string = '$_id')
 						$expr: {
 							$and: [
 								{ $eq: ['$likeRefId', '$$localLikeRefId'] },
-								{ $eq: ['$memberId', '$$localMemberId'] }],
+								{ $eq: ['$memberId', '$$localMemberId'] },
+							],
 						},
 					},
 				},
