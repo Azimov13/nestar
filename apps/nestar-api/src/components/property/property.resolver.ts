@@ -79,16 +79,24 @@ export class PropertyResolver {
 	@UseGuards(AuthGuard)
 	@Query((returns) => Properties)
 	public async getFavorites(
-		@Args('input') input:OrdinaryInquiry,
-		@AuthMember('_id') memberId: ObjectId,//param decorate orqali 
+		@Args('input') input: OrdinaryInquiry,
+		@AuthMember('_id') memberId: ObjectId, //param decorate orqali
 	): Promise<Properties> {
 		console.log('Query: getFavorites');
-		return await this.propertyService.getFavorites(memberId,input);
+		return await this.propertyService.getFavorites(memberId, input);
 	}
+   
 
-
-
-
+	//tamosha qilingan Propertilarni mantigi
+	@UseGuards(AuthGuard)
+	@Query((returns) => Properties)
+	public async getVisited(
+		@Args('input') input: OrdinaryInquiry,
+		@AuthMember('_id') memberId: ObjectId, //param decorate orqali
+	): Promise<Properties> {
+		console.log('Query: getVisited');
+		return await this.propertyService.getVisited(memberId, input);
+	}
 
 	@Roles(MemberType.AGENT)
 	@UseGuards(RolesGuard)
