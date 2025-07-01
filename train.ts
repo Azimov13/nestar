@@ -110,16 +110,35 @@ areArraysEqual([1, 2, 3], [4, 1, 2]) // false */
 // MASALAN: countNumberAndLetters(“string152%\¥”); return {number: 3, letter: 6};*//
 //=================================================================
 //=================================================================
-const countNumberAndLetters = (s: string) => {
-	let n = 0,
-		l = 0;
-	for (let c of s)
-		c >= '0' && c <= '9'
-			? n++
-			: ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) && l++;
-	return { number: n, letter: l };
-};
-
-console.log(countNumberAndLetters('abc123!')); // { number: 3, letter: 3 }
+// const countNumberAndLetters = (s: string) => {
+// 	let n = 0,
+// 		l = 0;
+// 	for (let c of s)
+// 		c >= '0' && c <= '9'
+// 			? n++
+// 			: ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')) && l++;
+// 	return { number: n, letter: l };
+// };
+// console.log(countNumberAndLetters('abc123!')); // { number: 3, letter: 3 }
+//=================================================================
+//=================================================================
+// TASK ZT:
+// Shunday function yozing, bu function parametrdagi string ichida
+// bir marotabadan ortiq qaytarilmagan birinchi harf indeksini qaytarsin
+// MASALAN: firstUniqueCharIndex(“stamp”); return 0;
+// Yuqoridagi misolda, 'stamp' so'zi tarkibida barcha harflar bir marotabadan
+// ortiq takrorlanmagan, lekin shartga muvofiq, birinchi topilgan harf indeksi qaytarilmoqda.
+function firstUniqueCharIndex(str: string): number {
+	for (let i = 0; i < str.length; i++) {
+		if (str.split(str[i]).length - 1 === 1) {
+			return i;
+		}
+	}
+	return -1;
+}
+//=================================================================
+console.log(firstUniqueCharIndex('stamp')); // 0
+console.log(firstUniqueCharIndex('success')); // 2
+console.log(firstUniqueCharIndex('aabbcc')); // -1
 //=================================================================
 //=================================================================
