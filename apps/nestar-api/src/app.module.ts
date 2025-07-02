@@ -9,6 +9,7 @@ import { ComponentsModule } from './components/components.module';
 import { DatabaseModule } from './database/database.module';
 import { T } from './libs/types/common';
 import { LikeService } from './component/like/like.service';
+import { SocketModule } from './socket/socket.module';
 
 @Module({
 	imports: [
@@ -31,8 +32,9 @@ import { LikeService } from './component/like/like.service';
 				return garphQLFormattedError;
 			},
 		}),
-		ComponentsModule, //HTTP bir marta ulanadi 
-		DatabaseModule, //TCP  database ulanyabdi holos
+		ComponentsModule, //HTTP bir marta ulanadi
+		DatabaseModule,
+		SocketModule, //TCP  database ulanyabdi holos
 	],
 	controllers: [AppController],
 	providers: [AppService, AppResolver, LikeService],
