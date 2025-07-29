@@ -74,7 +74,7 @@ export class CommentService {
 			{ _id: _id, memberId: memberId, commentStatus: CommentStatus.ACTIVE },
 			input,
 			{ new: true },
-		);
+		).exec();
 		if (!result) throw new InternalServerErrorException(Message.UPDATE_FAILED);
 		return result;
 	}
@@ -106,14 +106,14 @@ export class CommentService {
 					metaCounter: [{ $count: 'total' }],
 				},
 			},
-		]);
+		]).exec();
 		if (!result.length)
 			throw new InternalServerErrorException(Message.NO_DATA_FOUND);
 		return result[0];
 	}
 
 	public async removeCommentByAdmin(input: ObjectId): Promise<Comment> {
-		const result = await this.commentModel.findByIdAndDelete(input);
+		const result = await this.commentModel.findByIdAndDelete(input).exec();
 		if (!result) throw new InternalServerErrorException(Message.REMOVE_FAILED);
 		return result;
 	}

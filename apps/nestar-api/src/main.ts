@@ -16,7 +16,7 @@ async function bootstrap() {
 	app.use('/uploads', express.static('./uploads')); //folderni tashqi olamga ochiqlayamiz
 
 	app.useWebSocketAdapter(new WsAdapter(app));
-	await app.listen(process.env.PORT_API ?? 3000);
+	await app.listen(process.env.PORT_API ??  3000);
 }
 bootstrap();
 // APPmodule markaziy module xisoblanadi
